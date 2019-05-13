@@ -6,13 +6,11 @@
 		_Color("Tint", Color) = (1,1,1,1)
 		_Outline("Outline Size", Range(0.0,.3)) = .3
 		_OutlineCol("Outline Color", Color) = (0,0,0,1)
-		//_Bloom ("Bloom Intensity", Range(0.0, 1)) = 0.0
-		
 	}
 		SubShader
 		{
 
-			// Outline pass and Bloom
+			// Outline pass
 			Pass
 			{
 				Cull Front
@@ -40,8 +38,6 @@
 				uniform float _Outline;
 				uniform float4 _OutlineCol;
 				float4 _MainTex_ST;
-				//uniform float _Bloom;
-				
 
 
 				v2f vert(appdata v)
@@ -61,12 +57,7 @@
 
 				fixed4 frag(v2f i) : SV_Target
 				{
-					// sample the texture
-					//fixed4 col = tex2D(_MainTex, i.uv);
-					//return _OutlineCol;
-					//fixed4 col = _OutlineCol;
-					//col *= _OutlineCol;
-					//col *= _Bloom;
+
 					return _OutlineCol;
 				}
 
@@ -76,59 +67,47 @@
 			}
 
 
-
-
-
 			Pass
 			{
-				
 				CGPROGRAM
 				#pragma vertex vert
 				#pragma fragment frag
-
-
 				#include "UnityCG.cginc"
 
 				struct appdata
 				{
-					float4 pos : POSITION;
+					float4 vertex : POSITION;
 					float2 uv : TEXCOORD0;
 				};
 
 				struct v2f
 				{
-					float4 pos : SV_POSITION;
 					float2 uv : TEXCOORD0;
-
+					float4 vertex : SV_POSITION;
 				};
 
-
-				uniform sampler2D _MainTex;
-				uniform float4 _Color;
+				sampler2D _MainTex;
 				float4 _MainTex_ST;
-
-
+				float4 _Color;
 				v2f vert(appdata v)
 				{
 					v2f o;
-					o.pos = UnityObjectToClipPos(v.pos);
+					o.vertex = UnityObjectToClipPos(v.vertex);
 					o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+
 					return o;
-
-
 				}
 
 				fixed4 frag(v2f i) : SV_Target
 				{
-					fixed4 col = _Color * tex2D(_MainTex, i.uv);
 
-					return col;
+					return _Color;
 				}
-
-
-
-
 				ENDCG
 			}
+
+		
+
+			
 		}
 }
