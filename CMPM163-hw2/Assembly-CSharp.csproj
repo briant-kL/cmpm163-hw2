@@ -62,8 +62,13 @@
   <ItemGroup>
     <Compile Include="Assets\colorchange.cs" />
     <Compile Include="Assets\scripts\renderEffectTexture.cs" />
+    <Compile Include="Assets\scripts\scene_manage.cs" />
     <None Include="Assets\shaders\Phong.shader" />
+    <None Include="Assets\shaders\HillFromTexture.shader" />
+    <None Include="Assets\shaders\Reflection.shader" />
     <None Include="Assets\shaders\hw-2a-bloom1.shader" />
+    <None Include="Assets\shaders\water.shader" />
+    <None Include="Assets\shaders\Hill.shader" />
     <None Include="Assets\shaders\hw-2a-outline.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/briant/Documents/GitHub/cmpm163-hw2/CMPM163-hw2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
